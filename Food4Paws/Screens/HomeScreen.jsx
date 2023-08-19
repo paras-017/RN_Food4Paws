@@ -1,14 +1,16 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Category from '../components/Category'
 import Carousel from '../components/Carousel'
+import { useNavigation } from '@react-navigation/native'
 
 const HomeScreen = () => {
+  const navigation = useNavigation()
   return (
     <ScrollView>
       <View>
-      <Navbar/>
+      <Navbar wantLogo={true}/>
       <Category/>
       <Carousel/>
       <View className='space-y-3 mb-3'>
@@ -22,25 +24,33 @@ const HomeScreen = () => {
           <Text className='text-black text-center text-xl font-bold'>✨Explore By Pet Category ✨</Text>
           <View className='flex items-center space-y-3 my-3'>
             <View className='flex-row space-x-4'>
-              <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/cat.jpg')}/>
+              <TouchableOpacity onPress={()=>navigation.navigate('ProductScreen',{pet:'Cat'})}>
+               <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/cat.jpg')}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('ProductScreen',{pet:'Dog'})}>
               <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/dog.jpg')}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('ProductScreen',{pet:'Bird'})}>
               <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/birds.jpg')}/>
+              </TouchableOpacity>
+              
+             
             </View>
             <View className='flex-row space-x-4'>
-              <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/fish.jpg')}/>
-              <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/guineaPig.jpg')}/>
-              <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/rabbit.jpg')}/>
+              <TouchableOpacity onPress={()=>navigation.navigate('ProductScreen',{pet:'Fish'})}>
+               <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/fish.jpg')}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('ProductScreen',{pet:'guineaPig'})}>
+               <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/guineaPig.jpg')}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('ProductScreen',{pet:'Rabbit'})}>
+               <Image className='h-16 w-28 rounded-2xl' source={require('../assets/HomePage/petCategories/rabbit.jpg')}/>
+              </TouchableOpacity>
             </View>
           </View>
       </View>
       
-      {/* Our Sponsors */}
-      <View>
-        <View>
-          
-        </View>
-      </View>
-    </View>
+     </View>
     </ScrollView>
   )
 }
