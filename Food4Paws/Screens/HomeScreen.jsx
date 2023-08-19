@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Navbar from '../components/Navbar'
+import Category from '../components/Category'
+import Carousel from '../components/Carousel'
 
 const HomeScreen = () => {
   return (
     <View>
-      <Text className='text-red-500'>Home Screen</Text>
+      <Navbar/>
+      <Category/>
+      <Carousel/>
+      
     </View>
   )
 }
