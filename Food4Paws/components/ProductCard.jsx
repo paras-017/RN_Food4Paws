@@ -10,7 +10,7 @@ const ProductCard = ({ _id, name,brand,price,stars,review,mainImage}) => {
   const trimmedName = name.length > 33 ? name.slice(0, 33) + '...' : name;
 
   return (
-    <TouchableOpacity onPress={()=>navigation.navigate('SingleProduct',{id:_id})}>
+    <TouchableOpacity onPress={()=>navigation.navigate('SingleProduct',{_id:_id})}>
       <View className='h-[300px] w-44 rounded-md  bg-white p-1 overflow-hidden m-1'>
       <View className='Image h-40 w-40 '>
         <Image className='h-full w-full object-contain ' source={{uri:mainImage}}/>
