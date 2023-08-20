@@ -6,6 +6,7 @@ import { useProductContext } from '../context/productContext'
 import Star from '../common/Stars';
 const API = `https://food4pawsapi-production.up.railway.app/api/products`
 import Icon from 'react-native-vector-icons/FontAwesome'
+import AddToCart from '../components/AddToCart';
 
 const SingleProductScreen = ({route}) => {
     const {_id} = route.params
@@ -105,10 +106,11 @@ const SingleProductScreen = ({route}) => {
           <Text className='text-black font-medium'>Available:{priceInfo.discontPercent<=0?<Text className='text-red-700 font-bold'> Out of Stock</Text>:(<Text className='text-green-600 font-bold'> In Stock</Text>)}</Text>
         </View>
       
-      {/* AddToCart */}
-        <View>
-          <Text className='text-xl font-bold text-red-500'>Add to Cart***</Text>
-        </View>
+      {/*------ quantity and AddtoCart button------ */}
+      <View>
+       <AddToCart selectedWeight={selectedWeight} priceInfo={priceInfo} stock={stock} product={singleProduct} Pid={Pid}/>
+      </View>
+
       
       {/* Warranty */}
       <View className='flex-row'>
