@@ -4,6 +4,7 @@ import { useCartContext } from '../context/cartContext'
 import Navbar from '../components/Navbar'
 import { useNavigation } from '@react-navigation/native'
 import CartItem from '../components/CartItem'
+import RazorpayCheckout from 'react-native-razorpay';
 
 const CheckoutScreen = () => {
   const {cart,total_price,total_originalPrice} = useCartContext()
@@ -84,7 +85,32 @@ const CheckoutScreen = () => {
 
           {/* PAYMENT */}
           <View>
-            
+            <TouchableOpacity style={styles.checkOutBtn} onPress={()=>{
+               var options = {
+                    description: 'Credits towards consultation',
+                    image: require('../assets/navLogo.gif'),
+                    currency: 'INR',
+                    key: 'rzp_test_a2xr9ZzGOgOFur',
+                    amount: (50+total_price)*100,
+                    name: 'Food4Paws',
+                    order_id: '',//Replace this with an order_id created using Orders API.
+                    prefill: {
+                      email: 'fake.user@example.com',
+                      contact: '7060445812',
+                      name: 'Fake user'
+                    },
+                    theme: {color: '#2ab1c3'}
+                  }
+                  RazorpayCheckout.open(options).then((data) => {
+                    // handle success
+                    alert(`Success: ${data.razorpay_payment_id}`);
+                  }).catch((error) => {
+                    // handle failure
+                    // alert(`Error: ${error.code} | ${error.description}`);
+                  });
+              }}>
+              <Text className='text-slate-200 text-lg font-medium'>Pay  ₹{50+total_price}</Text>
+            </TouchableOpacity>
           </View>
          
         
@@ -99,5 +125,15 @@ export default CheckoutScreen
 const styles = StyleSheet.create({
   textBlack:{
     color:'black'
+  },
+  checkOutBtn:{
+   width:'100%',
+   height:50,
+   borderRadius:10,
+   backgroundColor:'black',
+   color:'white',
+   alignSelf:'center',
+   justifyContent:'center',
+   alignItems:'center'
   }
 })
