@@ -1,20 +1,35 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import * as Icon from "react-native-feather";
 import { useNavigation } from '@react-navigation/native';
+import { useCartContext } from '../context/cartContext';
 
 const ProductCard = ({ _id, name,brand,price,stars,review,mainImage}) => {
   const weight = Object.keys(price[0])[0]
   const pricebySize = price[0][weight]
   const navigation = useNavigation()
   const trimmedName = name.length > 33 ? name.slice(0, 33) + '...' : name;
+  const [isWishListed, setIsWishListed] = useState(false);
+  const {addFavProduct} = useCartContext()
+  
+  const toggleWishList = (id) => {
+    setIsWishListed(!isWishListed);
+    addFavProduct(id)
+
+  };
 
   return (
     <TouchableOpacity onPress={()=>navigation.navigate('SingleProduct',{_id:_id})}>
       <View className='h-[300px] w-44 rounded-md  bg-white p-1 overflow-hidden m-1'>
-      <View className='Image h-40 w-40 '>
+      <View className='FAV_ITEM absolute z-50 right-2 top-1'>
+        <TouchableOpacity onPress={()=>toggleWishList(_id)}>
+         <Icon.Heart height={20} fill={isWishListed ? 'red' : 'white'} width={20} stroke={isWishListed ? 'red' : 'black'} />
+        </TouchableOpacity>
+      </View>
+      <View className='Image h-40 w-40 p-3'>
         <Image className='h-full w-full object-contain ' source={{uri:mainImage}}/>
       </View>
+      
       <View className="Text space-y-2">
         {/* product name brand */}
         <View>

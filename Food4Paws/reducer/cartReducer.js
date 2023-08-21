@@ -108,6 +108,24 @@ const cartReducer = (state, action) => {
             cart: action.payload 
           };
   
+      case "ADD_TO_FAV_CART":
+        let { favProduct } = state;
+        let product_id = action.payload;
+    
+        // Check if the product_id is already in favProduct array
+        if (favProduct.includes(product_id)) {
+            // Remove the product_id from the favProduct array
+            favProduct = favProduct.filter(id => id !== product_id);
+        } else {
+            // Add the product_id to the favProduct array
+            favProduct = [...favProduct, product_id];
+        }
+        
+        return {
+            ...state,
+            favProduct: favProduct
+        };
+        
       default:
           break;
     }

@@ -8,8 +8,8 @@ const ProductScreen = () => {
  const {filter_products } = useFilterContext()
  const [searchText, setSearchText] = useState('');
  const filteredProducts = filter_products.filter(product =>
-  product.name.toLowerCase().includes(searchText.toLowerCase())
-);
+    product.name.toLowerCase().includes(searchText.toLowerCase())
+  );
   return (
     <View className='mb-16'>
       <Navbar wantLogo={false}/>

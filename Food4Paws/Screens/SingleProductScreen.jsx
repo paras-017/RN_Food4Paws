@@ -64,7 +64,7 @@ const SingleProductScreen = ({route}) => {
         <View className='NAME space-y-1'>
           <Text className='text-gray-500 font-medium'>{brand}</Text>
           <Text className='text-black text-base font-semibold'>{name}</Text>
-          <View><Star className='bg-green-300 ' stars={stars} reviews={review}/></View>
+          <View><Star stars={stars} reviews={review}/></View>
         </View>
 
       {/* PRICE ₹ */}

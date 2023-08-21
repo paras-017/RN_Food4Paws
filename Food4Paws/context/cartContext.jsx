@@ -5,6 +5,7 @@ const CartContext = createContext()
 
 const initialState = {
     cart:[],
+    favProduct:[],
     // cart:getLocalCartData(),
     total_item:"",
     total_originalPrice:"",
@@ -27,6 +28,9 @@ const CartProvider = ({children})=>{
     // Adding data to cart array
     const addToCart=(selectedWeight,quantity,priceInfo,product,Pid)=>{
      dispatch({type:"ADD_TO_CART", payload:{selectedWeight,quantity,priceInfo,product,Pid}})
+    }
+    const addFavProduct=(product_id)=>{
+     dispatch({type:'ADD_TO_FAV_CART', payload:product_id})
     }
     //Removing item from cart Array
     const removeItem = (id)=>{
@@ -55,7 +59,7 @@ const CartProvider = ({children})=>{
     
 
     return (
-    <CartContext.Provider value={{...state, addToCart,removeItem,setDecrease, setIncrement}}>
+    <CartContext.Provider value={{...state, addToCart,removeItem,setDecrease, setIncrement,addFavProduct}}>
         {children}
     </CartContext.Provider>
     )

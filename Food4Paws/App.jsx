@@ -9,6 +9,7 @@ import SingleProductScreen from './Screens/SingleProductScreen';
 import { FilterContextProvider } from './context/FilterContext';
 import { CartProvider } from './context/cartContext';
 import CheckoutScreen from './Screens/CheckoutScreen';
+import FavouriteProductsScreen from './Screens/FavouriteProductsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const App = () => {
               <Stack.Screen options={{headerShown:false}} name="ProductScreen" component={ProductScreen} />
               <Stack.Screen options={{headerShown:false}} name="SingleProduct" component={SingleProductScreen}/>
               <Stack.Screen options={{headerShown:false}} name='CheckoutScreen' component={CheckoutScreen}/>
+              <Stack.Screen options={{headerShown:false}} name='FavouriteProductsScreen' component={FavouriteProductsScreen}/>
             </Stack.Navigator>
           </NavigationContainer>
         </CartProvider>
