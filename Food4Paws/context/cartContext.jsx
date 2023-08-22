@@ -6,22 +6,12 @@ const CartContext = createContext()
 const initialState = {
     cart:[],
     favProduct:[],
-    // cart:getLocalCartData(),
     total_item:"",
     total_originalPrice:"",
     total_price:"",
     total_quantity:""
 }
 
-// const getLocalCartData =()=>{
-//     let localCartData = localStorage.getItem('cart');
-//     if (localCartData === 'undefined') {
-//         return [];
-//     } else {
-//         const parsedData = JSON.parse(localCartData);
-//         return parsedData;
-//     }
-// }
 
 const CartProvider = ({children})=>{
     const [state, dispatch] = useReducer(reducer, initialState) 
@@ -45,16 +35,9 @@ const CartProvider = ({children})=>{
         dispatch({ type: "SET_INCREMENT", payload: id });
       }
 
-    // Saving data to localStorage
-    // useEffect(() => {
-    //     const localCart = getLocalCartData();
-    //     dispatch({ type: 'INITIALIZE_CART', payload: localCart });
-    // }, [])
-    
 
     useEffect(() => {
         dispatch({type:"CART_TOTAL_ITEM_PRICE"})
-        // localStorage.setItem("cart",JSON.stringify(state.cart))
     }, [state.cart])
     
 
