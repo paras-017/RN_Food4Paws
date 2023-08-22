@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import { useCartContext } from '../context/cartContext'
 import QuantityButton from './QuantityButton'
 import { useNavigation } from '@react-navigation/native'
+import { useToast } from "react-native-toast-notifications";
 
 const AddToCart = ({selectedWeight,priceInfo, stock,product, Pid}) => {
+    const toast = useToast();
     const {addToCart} = useCartContext()    
     const [quantity, setQuantity] = useState(1)
     const navigation = useNavigation()
@@ -22,7 +24,13 @@ const AddToCart = ({selectedWeight,priceInfo, stock,product, Pid}) => {
             <Button title='Notify Me' disabled/>:
             <Button title='Add to Cart' onPress={()=>{
                 addToCart(selectedWeight,quantity,priceInfo,product,Pid)
-                navigation.navigate('CheckoutScreen')
+                toast.show("Item added to Cart", {
+                  type: "success",
+                  placement: "top",
+                  duration: 1800,
+                  offset: 30,
+                  animationType: "slide-in ",
+                })
             }}/>
         }
         </View>

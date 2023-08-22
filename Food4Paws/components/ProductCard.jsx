@@ -3,19 +3,38 @@ import React, { useState } from 'react'
 import * as Icon from "react-native-feather";
 import { useNavigation } from '@react-navigation/native';
 import { useCartContext } from '../context/cartContext';
+import { useToast } from "react-native-toast-notifications";
 
 const ProductCard = ({ _id, name,brand,price,stars,review,mainImage}) => {
+  const toast = useToast();
   const weight = Object.keys(price[0])[0]
   const pricebySize = price[0][weight]
   const navigation = useNavigation()
   const trimmedName = name.length > 33 ? name.slice(0, 33) + '...' : name;
   const [isWishListed, setIsWishListed] = useState(false);
+  const [added, setAdded] = useState(true);
   const {addFavProduct} = useCartContext()
   
   const toggleWishList = (id) => {
     setIsWishListed(!isWishListed);
+    setAdded(!added);
     addFavProduct(id)
-  };
+ 
+
+  added?toast.show("Item added to wishList", {
+    type: "success",
+    placement: "top",
+    duration: 1800,
+    offset: 30,
+    animationType: "slide-in ",
+  }):toast.show("Item removed from wishList", {
+    type: "danger",
+    placement: "top",
+    duration: 1800,
+    offset: 30,
+    animationType: "slide-in ",
+  });
+};
 
   return (
     <TouchableOpacity onPress={()=>navigation.navigate('SingleProduct',{_id:_id})}>
