@@ -29,10 +29,8 @@ const SingleProductScreen = ({route}) => {
         if(selectedPriceInfo){
           SetSelectedWeight(weight)
           setpriceInfo(selectedPriceInfo[weight])
-          
         }
-    
-      }
+       }
   return (
     <ScrollView className='bg-white'>
       <Navbar wantLogo={false}/>
@@ -40,19 +38,20 @@ const SingleProductScreen = ({route}) => {
       <View>
         {/* Main_IMAGE */}
         <View className='w-screen h-96 '>
-            <Image  style={styles.mainImage} source={{uri:mainImg}}/>
+          {mainImg && <Image style={styles.mainImage} source={{ uri: mainImg }} />}
         </View>
         {/* OTHER_IMAGE */}
         <View className='flex-row gap-1 bg-white'>
-            {images?.map((curElem,i)=>{
-                return(
-                   
-                      <TouchableOpacity key={curElem.id} onPress={()=>setMainImg(curElem.url)}>
-                        <Image source={{uri: curElem.url}} className='h-24 w-24'/>
-                      </TouchableOpacity>
-                   
-                )
-            })}
+          {images?.map((curElem, i) => {
+            if (curElem.url) {
+              return (
+                <TouchableOpacity key={curElem.id} onPress={() => setMainImg(curElem.url)}>
+                  <Image source={{ uri: curElem.url }} className='h-24 w-24' />
+                </TouchableOpacity>
+              );
+            }
+            return null; // or some default image rendering
+          })}
         </View>
       </View>
 
