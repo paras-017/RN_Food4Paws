@@ -2,17 +2,19 @@ import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'rea
 import React from 'react'
 import * as Icon from "react-native-feather";
 import Star from '../common/Stars';
+import { useNavigation } from '@react-navigation/native';
 
 const FavProductCard = ({_id,name,brand,dealPrice,stock,stars,review,mainImage,removeFav}) => {
     const trimmedName = name.length > 46 ? name.slice(0, 46) + '...' : name;
-    
+    const navigation = useNavigation()
   return (
     <ScrollView>
     <View className='border-2 border-gray-200 rounded-md p-1 h-[132px] mb-3 flex justify-center'>
     <View className="flex-row justify-between space-x-4 ">
         {/* IMAGE & INFO */}
         <View className='img&Info flex-row items-start relative  '>
-            {/*----IMAGE---- */}
+            <TouchableOpacity className='flex-row' onPress={()=>navigation.navigate('SingleProduct',{_id:_id})}>
+              {/*----IMAGE---- */}
             <View className="IMAGE h-32 w-28">
                 <Image style={styles.mainImage} source={{uri:mainImage}}/>
             </View>
@@ -37,6 +39,7 @@ const FavProductCard = ({_id,name,brand,dealPrice,stock,stars,review,mainImage,r
                 <Text className='text-gray-700 font-medium text-base '>₹{dealPrice}</Text>
                 </View>
             </View>
+            </TouchableOpacity>
 
             {/* REMOVE BUTTON */}
            <TouchableOpacity onPress={()=>removeFav(_id)}>
@@ -46,7 +49,7 @@ const FavProductCard = ({_id,name,brand,dealPrice,stock,stars,review,mainImage,r
            </TouchableOpacity>
         </View>
     </View>
-</View>
+  </View>
 </ScrollView>
   )
 }

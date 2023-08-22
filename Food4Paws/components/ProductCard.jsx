@@ -24,7 +24,7 @@ const ProductCard = ({ _id, name,brand,price,stars,review,mainImage}) => {
   added?toast.show("Item added to wishList", {
     type: "success",
     placement: "top",
-    duration: 1800,
+    duration: 1500,
     offset: 30,
     animationType: "slide-in ",
   }):toast.show("Item removed from wishList", {
