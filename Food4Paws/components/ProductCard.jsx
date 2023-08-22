@@ -15,7 +15,6 @@ const ProductCard = ({ _id, name,brand,price,stars,review,mainImage}) => {
   const toggleWishList = (id) => {
     setIsWishListed(!isWishListed);
     addFavProduct(id)
-
   };
 
   return (

@@ -6,7 +6,9 @@ import { useCartContext } from '../context/cartContext';
 
 const Navbar = ({wantLogo}) => {
   const navigation = useNavigation()
-  const {total_item}= useCartContext()
+  const {total_item,favProduct}= useCartContext()
+  
+
   return (
     <View className='flex-row justify-between  p-3'>
       <View  className='h-11  w-44  justify-center'>
@@ -24,8 +26,13 @@ const Navbar = ({wantLogo}) => {
         </TouchableOpacity>
 
         {/* Favorites */}
-        <TouchableOpacity onPress={()=>navigation.navigate('FavouriteProductsScreen')}>
-         <Icon.Heart height={25} width={25} stroke={'black'}/>
+        <TouchableOpacity onPress={() => navigation.navigate('FavouriteProductsScreen')}>
+          <Icon.Heart height={25} width={25} stroke={'black'} />
+          {favProduct.length >= 1 ? (
+            <Text className='text-black absolute bg-blue-400 h-5 w-5 text-center rounded-full bottom-4 left-3'>
+              {favProduct.length}
+            </Text>
+          ) : ('')}
         </TouchableOpacity>
 
 

@@ -5,12 +5,19 @@ import Navbar from '../components/Navbar'
 import { useNavigation } from '@react-navigation/native'
 import CartItem from '../components/CartItem'
 import RazorpayCheckout from 'react-native-razorpay';
+import EmptyCart from '../components/EmptyCart'
 
 const CheckoutScreen = () => {
   const {cart,total_price,total_originalPrice} = useCartContext()
   const navigation = useNavigation()
-
   
+    
+  if(cart.length===0){
+    return (
+      <EmptyCart imageType={require('../assets/EmptyCart.png')} text1={'Hey, it feels so light'} text2={"There is nothing in your bag. Let's add some items"}/>
+    )
+  }
+
 
   return (
     <ScrollView>
