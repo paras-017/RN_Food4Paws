@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, TextInput, Image } from 'react-native'
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
@@ -10,6 +10,26 @@ const ProductScreen = () => {
  const filteredProducts = filter_products.filter(product =>
     product.name.toLowerCase().includes(searchText.toLowerCase())
   );
+
+  if(filteredProducts.length===0){
+    return (
+      <View className='h-screen'>
+          <Navbar/>
+        <View>
+        <TextInput
+          value={searchText}
+          onChangeText={setSearchText} 
+          placeholder="Search by name"
+          placeholderTextColor='gray'
+          className='border-2 text-black h-9 w-48 absolute bottom-4 rounded-lg left-14'/>
+        </View>
+        <View className='flex justify-center items-center'>
+         <Image className='h-56 w-80 ' source={require('../assets/notFound.png')}/>
+        </View>
+      </View>
+    )
+  }else{
+
   return (
     <View className='mb-16'>
       <Navbar wantLogo={false}/>
@@ -31,5 +51,6 @@ const ProductScreen = () => {
       }/>
     </View>
   )
+}
 }
 export default ProductScreen
