@@ -29,7 +29,6 @@ const ProductScreen = () => {
       </View>
     )
   }else{
-
   return (
     <View className='mb-16'>
       <Navbar wantLogo={false}/>
